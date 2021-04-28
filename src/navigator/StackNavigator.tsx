@@ -10,6 +10,7 @@ import { PullToRefreshScreen } from '../screens/PullToRefreshScreen';
 import { SectionListScreen } from '../screens/SectionListScreen';
 import { ModalScreen } from '../screens/ModalScreen';
 import { InifineScrollScreen } from '../screens/InifineScrollScreen';
+import { SlidesScreen } from '../screens/SlidesScreen';
 
 const Stack = createStackNavigator();
 
@@ -19,7 +20,7 @@ export const StackNavigator = () => {
             screenOptions={{
                 headerShown: false,
                 cardStyle:{
-                    backgroundColor: 'white'
+                    // backgroundColor: 'white'
                 }
             }}
         >
@@ -33,6 +34,7 @@ export const StackNavigator = () => {
             <Stack.Screen name="SectionListScreen" component={ SectionListScreen }/>
             <Stack.Screen name="ModalScreen" component={ ModalScreen }/>
             <Stack.Screen name="InfiniteScrollScreen" component={ InifineScrollScreen }/>
+            <Stack.Screen name="SlidesScreen" component={ SlidesScreen }/>
         </Stack.Navigator>
     )
 }
