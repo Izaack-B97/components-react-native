@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { FlatList, View, Text, StyleSheet, Image, ActivityIndicator } from 'react-native';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import { HeaderTitle } from '../components/HeaderTitle';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 export const InifineScrollScreen = () => {
 
     const [ numbers, setNumbers ] = useState([ 0, 1, 2, 3, 4, 5 ])
+    const { theme:{ colors } } = useContext( ThemeContext )
 
     const renderItem = ( item : number ) => {
         return (
@@ -40,7 +43,7 @@ export const InifineScrollScreen = () => {
                         alignItems: 'center',
                         justifyContent: 'center'
                     }}>
-                        <ActivityIndicator size={ 50 } color='blue' />
+                        <ActivityIndicator size={ 50 } color={ colors.primary } />
                     </View>
                 )}
             />

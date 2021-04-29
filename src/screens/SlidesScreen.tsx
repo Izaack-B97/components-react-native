@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Dimensions, Image, ImageSourcePropType, Text, View, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { HeaderTitle } from '../components/HeaderTitle'
@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Spacer } from '../components/Spacer';
 import { useAnimation } from '../hooks/useAnimation';
 import { useNavigation } from '@react-navigation/core';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 interface Slide {
     title: string;
@@ -43,12 +44,13 @@ export const SlidesScreen = () => {
     const [ enabledButton, setEnabledButton] = useState( false );
 
     const navigation = useNavigation();
+    const { theme:{ colors } } = useContext( ThemeContext )
 
     const renderItem = ( item : Slide ) => {
         return(
             <View 
-                style={{ 
-                    backgroundColor: 'white', 
+            style={{ 
+                    backgroundColor: colors.background, 
                     flex: 1, 
                     justifyContent: 'center',
                     borderRadius: 5,
@@ -64,8 +66,8 @@ export const SlidesScreen = () => {
                     }}
                 />
 
-                <Text style={ styles.title }>{ item.title }</Text>
-                <Text style={ styles.subtitle }>{ item.desc }</Text>
+                <Text style={{ ...styles.title, color: colors.primary } }>{ item.title }</Text>
+                <Text style={{ ...styles.subtitle, color: colors.primary } }>{ item.desc }</Text>
             </View>
         )
     };
@@ -101,11 +103,12 @@ export const SlidesScreen = () => {
                 <Pagination 
                     dotsLength={ items.length }
                     activeDotIndex={ activeIndex }
-                    // containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
+                    // containerStyle={{ backgroundColor: colors.primary }}
                     dotStyle={{
                         width: 10,
                         height: 10,
-                        borderRadius: 20
+                        borderRadius: 20,
+                        backgroundColor: colors.primary
                     }}
                 />
                 <Spacer />
@@ -118,7 +121,7 @@ export const SlidesScreen = () => {
                             <Animated.View
                                 style={{
                                     flexDirection: 'row',
-                                    backgroundColor: '#5856D6',
+                                    backgroundColor: colors.primary,
                                     height: 50,
                                     width: 130,
                                     borderRadius: 5,

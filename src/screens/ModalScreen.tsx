@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, Text, Modal, Button } from 'react-native';
 import { HeaderTitle } from '../components/HeaderTitle';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 import { styles } from '../theme/appTheme';
 
 export const ModalScreen = () => {
     
     const [isVisible, setIsVisible] = useState( false );
+
+    const { theme:{ colors } } = useContext( ThemeContext )
 
     return (
         <View style={ styles.globalMargin }>
@@ -29,7 +32,7 @@ export const ModalScreen = () => {
                     {/* Contenido del modal */}
                     <View 
                         style={{ 
-                            backgroundColor: 'white', 
+                            backgroundColor: colors.notification, 
                             padding: 20,
                             borderRadius: 10, 
                             shadowOffset: {
@@ -37,7 +40,7 @@ export const ModalScreen = () => {
                                 height: 20,
                             },
                             shadowOpacity: 0.25,
-                            elevation: 20
+                            elevation: 20,
                         }}
                     >
                         <HeaderTitle title="Cuerpo del modal"/>

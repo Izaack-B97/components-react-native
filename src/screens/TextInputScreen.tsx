@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { View, TextInput, StyleSheet, KeyboardAvoidingView, Platform, ScrollView, Text } from 'react-native';
 import { styles } from '../theme/appTheme';
 import { HeaderTitle } from '../components/HeaderTitle';
 import { useForm } from '../hooks/useForm';
 import { CustomSwitch } from '../components/CustomSwitch';
+import { ThemeContext } from '../context/themeContext/ThemeContext';
 
 export const TextInputScreen = () => {
     
@@ -15,6 +16,8 @@ export const TextInputScreen = () => {
     });
 
     const { name, email, phone, isSubscribe } = form;
+
+    const { theme: { colors, dark } } = useContext( ThemeContext )
     
     return (
         <KeyboardAvoidingView
@@ -24,7 +27,7 @@ export const TextInputScreen = () => {
                 <View style={ styles.globalMargin }>
                     <HeaderTitle title="TextInputs" />
                     <TextInput 
-                        style={ myStyles.textInput }
+                        style={{ ...myStyles.textInput, backgroundColor: dark ? 'white' : '' }}
                         placeholder='Escriba su nombre'
                         autoCorrect={ false }
                         autoCapitalize='words'
@@ -32,15 +35,16 @@ export const TextInputScreen = () => {
                         value={ name }
                     />
                     <TextInput 
-                        style={ myStyles.textInput }
+                        style={{ ...myStyles.textInput, backgroundColor: dark ? 'white' : '' }}
                         placeholder='Escriba email'
                         onChangeText={ ( value ) => onChange( 'email', value ) }
                         value={ email }
                         keyboardType='email-address'
                     />
 
-                    <View>
-                        <Text>Subscribirme</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Text style={{ color: colors.text }}>Subscribirme</Text>
+
                         <CustomSwitch isOn={ isSubscribe } onChange={ ( value ) => onChange( 'isSubscribe', value ) }/>
                     </View>
 
@@ -48,7 +52,7 @@ export const TextInputScreen = () => {
                     <HeaderTitle title={ JSON.stringify( form, null, 5 ) } />
 
                     <TextInput 
-                        style={ myStyles.textInput }
+                        style={{ ...myStyles.textInput, backgroundColor: dark ? 'white' : '' }}
                         placeholder='Escriba su telefono'
                         onChangeText={ ( value ) => onChange( 'phone', value ) }
                         value={ phone }
@@ -69,7 +73,6 @@ const myStyles = StyleSheet.create({
         paddingHorizontal: 10,
         borderRadius: 10,
         borderColor: 'rgba(0,0,0,0.3)',
-        marginVertical: 10
-
+        marginVertical: 10,
     }
 });
